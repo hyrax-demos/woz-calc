@@ -1,0 +1,12 @@
+[project]
+name = "woz-calc"
+version = "0.1.0"
+description = "A tiny calculator module."
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+test = ["pytest==8.3.4"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
