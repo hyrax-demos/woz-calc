@@ -12,13 +12,17 @@ import calc
         (calc.subtract, 0, 4, -4),
         (calc.multiply, 3, 4, 12),
         (calc.multiply, -2, 2.5, -5.0),
+        (calc.divide, 12, 4, 3.0),
+        (calc.divide, 7, 2, 3.5),
+        (calc.divide, -5.0, 2, -2.5),
+        (calc.divide, 0, 5, 0.0),
     ],
 )
 def test_arithmetic(fn, a, b, expected):
     assert fn(a, b) == expected
 
 
-@pytest.mark.parametrize("fn", [calc.add, calc.subtract, calc.multiply])
+@pytest.mark.parametrize("fn", [calc.add, calc.subtract, calc.multiply, calc.divide])
 def test_none_raises_value_error(fn):
     with pytest.raises(ValueError):
         fn(None, 1)
@@ -26,9 +30,29 @@ def test_none_raises_value_error(fn):
         fn(1, None)
 
 
-@pytest.mark.parametrize("fn", [calc.add, calc.subtract, calc.multiply])
+@pytest.mark.parametrize("fn", [calc.add, calc.subtract, calc.multiply, calc.divide])
 def test_non_number_raises_type_error(fn):
     with pytest.raises(TypeError):
         fn("1", 2)
     with pytest.raises(TypeError):
         fn(1, [2])
+
+
+@pytest.mark.parametrize("zero", [0, 0.0, -0.0])
+def test_divide_by_zero_raises_value_error(zero):
+    with pytest.raises(ValueError):
+        calc.divide(1, zero)
+
+
+def test_divide_by_zero_is_not_zero_division_error():
+    try:
+        calc.divide(1, 0)
+    except ZeroDivisionError:  # pragma: no cover - failure path
+        pytest.fail("divide raised ZeroDivisionError instead of ValueError")
+    except ValueError:
+        pass
+
+
+def test_divide_type_checked_before_zero_check():
+    with pytest.raises(TypeError):
+        calc.divide(1, "0")
