@@ -24,5 +24,6 @@ def multiply(a, b):
 
 
 def power(a, b):
+    """Return a raised to the power of b."""
     _validate(a, b)
     return a**b

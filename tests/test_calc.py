@@ -38,6 +38,10 @@ def test_power():
     assert calc.power(2, 3) == 8
 
 
+def test_power_zero_exponent():
+    assert calc.power(2, 0) == 1
+
+
 def test_power_none_raises_value_error():
     with pytest.raises(ValueError):
         calc.power(None, 1)
