@@ -21,3 +21,8 @@ def subtract(a, b):
 def multiply(a, b):
     _validate(a, b)
     return a * b
+
+
+def power(a, b):
+    _validate(a, b)
+    return a**b

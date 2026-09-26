@@ -32,3 +32,17 @@ def test_non_number_raises_type_error(fn):
         fn("1", 2)
     with pytest.raises(TypeError):
         fn(1, [2])
+
+
+def test_power():
+    assert calc.power(2, 3) == 8
+
+
+def test_power_none_raises_value_error():
+    with pytest.raises(ValueError):
+        calc.power(None, 1)
+
+
+def test_power_non_number_raises_type_error():
+    with pytest.raises(TypeError):
+        calc.power("2", 1)
