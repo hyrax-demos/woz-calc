@@ -32,3 +32,17 @@ def test_non_number_raises_type_error(fn):
         fn("1", 2)
     with pytest.raises(TypeError):
         fn(1, [2])
+
+
+def test_divide():
+    assert calc.divide(6, 3) == 2
+
+
+def test_divide_by_zero_raises():
+    with pytest.raises(ZeroDivisionError, match="division by zero"):
+        calc.divide(1, 0)
+
+
+def test_divide_none_raises_value_error():
+    with pytest.raises(ValueError, match="inputs must not be None"):
+        calc.divide(None, 1)
